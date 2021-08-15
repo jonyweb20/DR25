@@ -2,8 +2,8 @@ let arrColor = [];
 let objColor = {};
 
 class Ink {
-    constructor(arrCol) {
-        this.color = arrCol.value;
+    constructor(objCol) {
+        this.color = objCol;
         this.qty = 10;
     }
 
@@ -24,7 +24,6 @@ class Ink {
     }
 
     textIn(elem) {
-        debugger;
         let textSpan = document.querySelector('.outText');
         let newSpan = document.createElement('span');
         textSpan.appendChild(newSpan);
@@ -47,13 +46,12 @@ class Ink {
 function colorSelect() {
     let setColors = document.getElementById('inColor').value;
     let outColor = document.querySelector('.block-color');
-    debugger
     for (let i = 0; i <= arrColor.length; i++) {
         if (arrColor.length === 0 || arrColor.indexOf(setColors) === -1) {
             let button = document.createElement('button');
             button.setAttribute('name', 'buttonColor');
             button.setAttribute('id', 'btn' + [i]);
-            button.onclick = colorOut(setColors);
+            button.onclick = colorOut();
             /*  button.innerHTML = `${intColor.flowInk()}`*/
             button.style.background = setColors;
             button.style.width = '40px';
@@ -69,53 +67,20 @@ function colorSelect() {
 }
 
 function text() {
-    debugger;
     let inpText = document.querySelector('.inText').value;
     let arStrong = inpText.split('').pop();
     console.log(arStrong);
-    return arStrong
-
+    return arStrong;
 }
-function colorOut(color) {
+function colorOut() {
     debugger
-    if (arrColor.includes(color))
-        return color;
+    document.addEventListener("click", function (e) {
+       let btn =  arrColor.find(function (el){ if (el.name === e.target.id) return el.value});
+        console.log(btn.value)
+        return btn.value;
+    });
 }
-
-const intColor = new Ink(`arrColor`);
-
+const intColor = new Ink(colorOut);
 function f(){
 intColor.flowInk()
 }
-
-
-/*const skills = {
-    code(thing) {
-        console.log('Я умею кодить' + ' ' + thing)
-    },
-    design(thing) {
-        console.log('Я умею рисовать' + ' ' + thing)
-    },
-    sayHello() {
-        console.log('Я ничего не умею')
-    }
-}
-
-class DesignerDeveloper {
-    constructor(firstName, lastName) {
-        this.firstName = firstName
-        this.lastName = lastName
-    }
-}
-
-Object.assign(DesignerDeveloper.prototype, {
-    code: skills.code,
-    design: skills.design,
-    sayHello: skills.sayHello
-})
-
-let web = 'xgfhf'
-const chris = new DesignerDeveloper('Chris', 'Coyier')
-console.log(chris.code(web))*/
-
-
