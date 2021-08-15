@@ -1,43 +1,48 @@
+let arrColor = [];
+let objColor = {};
+
 class Ink {
-    constructor(arCol, colors) {
-        this.name = arCol.name;
-        this.value = colors;
+    constructor(arrCol) {
+        this.color = arrCol.value;
         this.qty = 10;
     }
 
     flowInk() {
-        let text = textIn();
-        let i = 0;
-        let result = 0;
-           if (this.balanceInk(this.qty) && text.length <= this.qty) {
-            this.qty -= 0.5;
-            result = text.length;
-            return result
+        let el = text();
+        let char = '';
+        for (let i = 0; i < arrColor.length; i++) {
+            if (this.balanceInk(this.qty)) {
+                char = this.textIn(el);
+                this.qty -= 0.5;
+                break;
+            }
         }
     }
+
     balanceInk(qty) {
-        debugger;
         return qty > 0;
     }
 
-    setQty(valueQty) {
-        this.qty = valueQty;
-        if (valueQty > 10) this._qty = 10;
+    textIn(elem) {
+        debugger;
+        let textSpan = document.querySelector('.outText');
+        let newSpan = document.createElement('span');
+        textSpan.appendChild(newSpan);
+        newSpan.style.color = this.color;
+
+        newSpan.innerText += elem
+        return newSpan.innerText
     }
 
-    getQty() {
-        return this.qty;
-    }
+    /*    setQty(valueQty) {
+            this.qty = valueQty;
+            if (valueQty > 10) this.qty = 10;
+        }
+        getQty() {
+            return this.qty;
+        }*/
 
 }
-
-function keyboardTest() {
-    var x = document.getElementById("name")
-    x.value = x.value.toUpperCase();
-}
-
-let arrColor = [];
-let objColor = {};
 
 function colorSelect() {
     let setColors = document.getElementById('inColor').value;
@@ -46,11 +51,10 @@ function colorSelect() {
     for (let i = 0; i <= arrColor.length; i++) {
         if (arrColor.length === 0 || arrColor.indexOf(setColors) === -1) {
             let button = document.createElement('button');
-            button.setAttribute('name', 'buttonColor')
-            button.setAttribute('id', 'btn' + [i])
-          /*  button.innerHTML = `${intColor.flowInk()}`*/
+            button.setAttribute('name', 'buttonColor');
+            button.setAttribute('id', 'btn' + [i]);
             button.onclick = colorOut(setColors);
-           /* button.onclick =*/
+            /*  button.innerHTML = `${intColor.flowInk()}`*/
             button.style.background = setColors;
             button.style.width = '40px';
             button.style.height = '30px';
@@ -63,35 +67,29 @@ function colorSelect() {
         }
     }
 }
-function textIn(){
-   let intext = document.querySelector('.inText').value;
-let out = document.querySelector('.outText');
-           out.innerHTML = intext;
-return out.innerHTML
+
+function text() {
+    debugger;
+    let inpText = document.querySelector('.inText').value;
+    let arStrong = inpText.split('').pop();
+    console.log(arStrong);
+    return arStrong
+
+}
+function colorOut(color) {
+    debugger
+    if (arrColor.includes(color))
+        return color;
+}
+
+const intColor = new Ink(`arrColor`);
+
+function f(){
+intColor.flowInk()
 }
 
 
-function colorOut(color){
-    let out = document.querySelector('.outText');
-    out.style.color = color
-   return color
-}
-let btn0 = colorOut();
-const intColor = new Ink(arrColor, colorOut());
-console.log(intColor.flowInk())
-console.log(btn0)
-console.log(res)
-let res = intColor.flowInk()
-/* inp.addEventListener('change', function ()
-    {out.value = inp.value})
-    return out*/
-
-
-/*console.log(intColor.getQty());*/
-
-/*
-
-const skills = {
+/*const skills = {
     code(thing) {
         console.log('Я умею кодить' + ' ' + thing)
     },
@@ -118,7 +116,6 @@ Object.assign(DesignerDeveloper.prototype, {
 
 let web = 'xgfhf'
 const chris = new DesignerDeveloper('Chris', 'Coyier')
-console.log(chris.code(web))
+console.log(chris.code(web))*/
 
-*/
 
