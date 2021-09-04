@@ -7,24 +7,39 @@
 </head>
 <body>
 <div class="container">
+
     <div class="block">
-        <div class="block-input">
-            <div class="block select-color">
-                <input type="color" class="inColor" id="inColor">
-                <button type="button" onclick="colorSelect()">Выбрать цвет</button>
+        <h2>Задание №1</h2>
+        <div class="blockInk">
+            <div class="block-input">
+                <div class="blockInk select-color">
+                    <input type="color" class="inColor" id="inColor">
+                    <button type="button" class="btn btn-clear" onclick="clear()">Сбросить</button>
+                </div>
+                <div class="blockInk block-text">
+                    <input type="text" class="inText" oninput="fun()">
+                </div>
             </div>
-            <div class="block block-text">
-                <input type="text" class="inText" oninput="f()">
+            <div class="blockInk_out">
+                <h2>Здесь выводиться текст</h2>
+                <p class="outText"></p>
             </div>
         </div>
-        <p class="outText"></p>
+        <div class="blockInk block-color">
+        </div>
     </div>
-    <div class="block block-color">
+    <div class="block">
+        <h2>Задание №2</h2>
+        <div class="block-list">
+            <h2>Здесь представлен список сотрудников</h2>
+            <button type="button" onclick="listPr()" class="btn btn-list">Показать весь список</button>
+            <p class="block-list_table"></p>
+        </div>
     </div>
-
 </div>
 
 
 <script src="code.js"></script>
+<script src="worker.js"></script>
 </body>
 </html>

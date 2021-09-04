@@ -6,6 +6,11 @@ body{
 }
 .container{
     display: flex;
+    flex-direction: column;
+}
+.blockInk{
+    display: flex;
+    margin: 1em;
 }
 .block-input{
     border: 2px solid greenyellow;
@@ -17,4 +22,21 @@ body{
 }
 .buttonColor{
     margin: 0.5em;
+}
+.btn{
+    background-color: cyan;
+    margin: 2px;
+    border-radius: 5px;
+}
+.blockInk_out{
+    display: flex;
+    flex-direction: column;
+}
+.outText{
+    margin: 3px;
+letter-spacing: 5px;
+}
+.cell{
+    margin: 10px;
+
 }

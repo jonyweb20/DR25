@@ -1,23 +1,27 @@
+
 let arrColor = [];
-let objColor = {};
+/*let objColor = {};*/
 
 class Ink {
-    constructor(objCol) {
-        this.color = objCol;
-        this.qty = 10;
+    constructor(qty) {
+        this.qty = qty;
     }
 
-    flowInk() {
-        let el = text();
+    flowInk(objCol) {
+        this.color = objCol;
+        let el = this.text();
         let char = '';
-        for (let i = 0; i < arrColor.length; i++) {
-            if (this.balanceInk(this.qty)) {
+        if(el){
+            if (this.balanceInk(this.qty) && this.color) {
                 char = this.textIn(el);
+                if(el !== " "){
                 this.qty -= 0.5;
-                break;
-            }
-        }
-    }
+                arrColor.push(char);
+            }}
+            else alert('Чернила закончились')
+
+            console.log(this.qty)
+    }}
 
     balanceInk(qty) {
         return qty > 0;
@@ -32,27 +36,46 @@ class Ink {
         newSpan.innerText += elem
         return newSpan.innerText
     }
+    text() {
+        let inpText = document.querySelector('.inText').value;
+            return inpText.split('').pop();
+    }
 
-    /*    setQty(valueQty) {
-            this.qty = valueQty;
-            if (valueQty > 10) this.qty = 10;
+       setQty() {
+            this.qty = 10;
         }
-        getQty() {
+       /* getQty() {
             return this.qty;
         }*/
 
 }
+const qty = 5;
+const intColor = new Ink(qty);
+function fun() {
+    let setColors = document.getElementById('inColor').value;
+    intColor.flowInk(setColors);
+}
+function clear(){
+    debugger;
+    document.querySelector('.inText').value = "";
+   document.querySelector('.outText').value= "";
+    intColor.setQty();
+}
 
+
+// Проба для реализации выбора цвета через кнопки
+/*
 function colorSelect() {
+    debugger;
     let setColors = document.getElementById('inColor').value;
     let outColor = document.querySelector('.block-color');
     for (let i = 0; i <= arrColor.length; i++) {
-        if (arrColor.length === 0 || arrColor.indexOf(setColors) === -1) {
+        if (arrColor.length === 0 || /!*arrColor.indexOf(setColors) === -1*!/ arrColor[i] === undefined) {
             let button = document.createElement('button');
             button.setAttribute('name', 'buttonColor');
             button.setAttribute('id', 'btn' + [i]);
-            button.onclick = colorOut();
-            /*  button.innerHTML = `${intColor.flowInk()}`*/
+            button.setAttribute('value', setColors);
+            button.innerHTML = `${intColor.flowInk(this.qty)}`
             button.style.background = setColors;
             button.style.width = '40px';
             button.style.height = '30px';
@@ -61,26 +84,17 @@ function colorSelect() {
             objColor.name = 'btn' + [i];
             objColor.value = setColors;
             arrColor.push(objColor);
+            button.onclick = colorOut(this.value);
             break;
         }
     }
 }
+*/
 
-function text() {
-    let inpText = document.querySelector('.inText').value;
-    let arStrong = inpText.split('').pop();
-    console.log(arStrong);
-    return arStrong;
-}
-function colorOut() {
+
+
+//выбор цвета через функцию
+/*function colorOut(colTarget) {
     debugger
-    document.addEventListener("click", function (e) {
-       let btn =  arrColor.find(function (el){ if (el.name === e.target.id) return el.value});
-        console.log(btn.value)
-        return btn.value;
-    });
-}
-const intColor = new Ink(colorOut);
-function f(){
-intColor.flowInk()
-}
+    arrColor.find(function (el){ if (el.value === colTarget) return colTarget});
+}*/
